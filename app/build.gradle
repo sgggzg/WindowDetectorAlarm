@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.sgggzg.qmzg'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.sgggzg.qmzg"
+        minSdk 23
+        targetSdk 35
+        versionCode 3
+        versionName "3.0"
+
+        aaptOptions {
+            noCompress "traineddata"
+        }
+
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.fragment:fragment:1.8.0'
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
+    implementation 'cz.adaptech.tesseract4android:tesseract4android:4.7.0'
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+}

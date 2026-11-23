@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/layoutDarkMask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暗屏遮罩不透明度"
+                android:textSize="12sp"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/tvMaskAlphaValue"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="95%"
+                android:gravity="end"
+                android:textSize="12sp"
+                android:textColor="@color/text_primary" />
+        </LinearLayout>
+
+        <com.sgggzg.qmzg.MarkedSeekBar
+            android:id="@+id/sbMaskAlpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="99"
+            android:progress="95" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="数值越高，屏幕越暗；红点位置（90）为推荐值"
+            android:textSize="10sp"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/layoutDarkMask"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="等待启动..."
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swEnableImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="图像"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swEnableLog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日志"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary"
+            android:layout_marginStart="4dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnToggleLog"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示日志"
+            android:textSize="12sp"
+            android:textColor="@color/accent_blue" />
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPreview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="@color/card_bg"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutStatus"
+        app:layout_constraintBottom_toTopOf="@id/layoutButtons">
+
+        <ImageView
+            android:id="@+id/ivPreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:background="#0D0D1A" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardLog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="#0D0D1A"
+        app:cardCornerRadius="12dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/layoutStatus"
+        app:layout_constraintBottom_toTopOf="@id/layoutButtons">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tvLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#88FF88"
+                android:textSize="11sp"
+                android:typeface="monospace" />
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/layoutButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="开始监控"
+            android:textColor="@color/text_primary"
+            app:backgroundTint="@color/accent_red"
+            android:layout_marginEnd="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTestAlarm"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="测试报警"
+            android:textColor="@color/text_primary"
+            app:backgroundTint="@color/accent_orange" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
