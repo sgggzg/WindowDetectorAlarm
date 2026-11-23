@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 1. 文本过滤说明（含冲突检测） -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTitle1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📝 匹配规则使用说明（点击展开）"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContent1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 匹配单位三选一：整框（框内所有文字拼成一段，任意位置命中即报警，出现剔除逻辑则整框不报）、单句（按标点和行边缘/字宽高分句，每句独立匹配）、单行（每个物理行独立匹配）。\n\n• 条件组：组内关键词必须全部出现；多个条件组之间是“或”。\n\n• 模糊额度：组头可设整个条件组允许的错字总数（留空=不限）；点关键词标签可改文字，并单独设该关键词允许的错字个数（默认 0）。\n\n• 精确优先：任意单位/条件组完全命中就立即报警；没有完全命中时，才检查错字额度内的候选，并且只对不一致的字做概率复核。\n\n• 剔除逻辑：按同一单位生效，命中任一剔除逻辑则该单位不报警。"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 2. 检测逻辑说明（含整框模式） -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="⚙️ 检测逻辑与方案（点击展开）"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContent2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 块外 OR：不同条件组之间是【或】关系，任意一组满足就报警。\n\n• 块内 AND：同一组内的关键词必须全部出现。\n\n• 单句识别：先按逗号/句号/问号/叹号/分号切句，再用行边缘、行距、字宽高判断跨行片段是否同属一句；标点结尾的片段不会与下一条合并。\n\n• 单行识别：每个物理行独立匹配，关键词不能跨行。\n\n• 整框识别：框内所有文字拼成一段，关键词可以在不同行；出现剔除逻辑则整框不报。\n\n• 检测方案：设置页顶部可以新建/复制/重命名/删除方案。比如“三国公告”用屏幕下方区域 + [158, 正在尝试占领]，“好友列表”用中间区域 + [送花]。切换方案后立即生效，无需重装。"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 3. 调整检测区域（含左右边界） -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTitle3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🖼️ 如何调整检测区域（点击展开）"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContent3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 在“设置”页，点击“预览区域”按钮。\n\n• 预览界面可以拖动上、下、左、右四条边，框选出游戏里公告栏所在的位置。\n\n• 调整完毕后点击“应用并返回”，四个边界数值会自动同步到设置页。\n\n• 边界使用 0 到 1 的小数表示：\n   - 上边界 0.66 表示从屏幕顶部往下 66% 的位置\n   - 左边界 0.10 表示从屏幕左侧往右 10% 的位置\n\n• 建议：左右边界留出 5% 的安全边距，不要紧贴文字，否则可能切到字形导致 OCR 识别错误。\n\n• 提示：调整左右边界后，暗屏遮罩的半透明识别区会自动同步缩放，屏幕整体会更暗更省电。"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 4. 【新增】暗屏挂机说明 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTitle4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🌑 暗屏挂机使用说明（点击展开）"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContent4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 作用：让屏幕在挂机时几乎全黑，省电、防误触、保护屏幕，同时在后台继续 OCR 识别。\n\n• 开启方式：点击悬浮球展开菜单，点“暗屏”按钮；或下拉通知栏，点“暗屏”按钮。\n\n• 关闭方式：\n   1. 悬浮球菜单里点“亮屏”\n   2. 通知栏里点“亮屏”\n   3. 触摸屏幕（会短暂亮起），长按 2 秒\n\n• 触摸屏幕时会临时亮起显示文字提示，3 秒无操作后自动变暗。\n\n• 不透明度：在主页顶部调节。数值越高屏幕越暗。红点位置（90%）是推荐值。最高 99%，100% 会导致完全黑屏，OCR 无法识别。\n\n• 原理：遮罩内识别区加半透明黑，识别区外纯黑。截图后应用会做逆变换把亮度还原，再送 OCR。因此不透明度越高，还原时的噪声也会越大，识别率可能略有下降。\n\n• 注意：识别区越窄（左右边界越收紧），屏幕整体越暗，越省电。"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 5. 减少发热优化性能 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTitle5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🌡️ 挂机时如何减少发热（点击展开）"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContent5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 调大 OCR 检测间隔：在“识别与匹配”中，把间隔从 3 秒改为 5 秒或更高，能显著降低 CPU 占用。\n\n• 开启“画面无变化时跳过OCR”：当公告栏没变化时，不会反复识别。这是省电降温的最强开关，强烈建议开启。\n\n• 收紧左右边界：把识别区收窄，OCR 处理的数据量减少，速度更快、发热更低。\n\n• 开启暗屏挂机：屏幕绝大部分区域纯黑，能显著减少屏幕发热。\n\n• 关闭“图像上传”：如果不需要实时查看截图，可以关闭主页的“图像”开关，能节省广播和 Bitmap 内存复制的开销。\n\n• 关闭“日志”：主页的日志开关会同时停止服务日志的内存记录、界面广播和文件写入；关闭后不再产生新的服务日志。"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 6. OCR 引擎说明 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTitle6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🔤 OCR 引擎说明（点击展开）"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContent6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 4.x 版已把 Tesseract 换成 PP-OCRv4（RapidOCR 同款 ONNX 模型），纯 Java + ONNX Runtime 实现，不需要 OpenCV/NDK，可以在 AIDE Pro 里构建。\n\n• PP-OCR 自带完整中文字符集，不再需要维护白名单；对游戏里的白字描边、彩色字、深浅背景都更稳。\n\n• 先检测文字行，再逐行识别，适合公告、列表、按钮等复杂界面。\n\n• 单句模式会结合标点、行边缘、行距、字宽高判断是不是同一条消息；标点结尾不会与下一条合并。\n\n• 如果识别不到，优先检查识别区域是否框准、文字是否太小；必要时把区域收窄、放慢间隔。"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 7. 如何停止报警/监控 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTitle7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🛑 如何停止报警/监控（点击展开）"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContent7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 点击主界面“停止”按钮：直接停止整个后台监控服务。\n\n• 暂停/继续：主页、悬浮球和通知栏都有同一个按钮；暂停中会先处理完剩余工作，再变成“继续监控”。\n\n• 报警时这个按钮会变成“停止报警”，点击后停止报警并继续监控。\n\n• 触发报警时弹出的悬浮窗，点击“关闭并静音”按钮，会关闭当前报警并继续监控，冷却时间可在“识别与匹配”里调整（默认 5 秒）。"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 8. 检查更新（常驻卡片，不折叠） -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🔄 检查更新"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCurrentVersion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="当前版本：--"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:layout_marginTop="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 从 GitHub 自动获取最新版本信息\n• 支持多镜像站下载，断点续传\n• 下载完成后自动校验 APK 包名"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCheckUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="检查更新"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- 8. 存储清理 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧹 存储清理"
+                    android:textColor="@color/accent_red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="检查旧版本遗留模型、旧日志和旧更新包；不会删除检测方案、关键词和当前 OCR 模型。"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCleanGarbage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:text="清理垃圾" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
