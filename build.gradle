@@ -9,7 +9,6 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        // 必须使用 8.7.0，完美兼容你外置的 Gradle 8.13
         classpath 'com.android.tools.build:gradle:8.7.0'
     }
 }
