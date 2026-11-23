@@ -22,6 +22,10 @@ import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sgggzg.qmzg.core.AppLog;
+import com.sgggzg.qmzg.core.RuntimeState;
+import com.sgggzg.qmzg.data.ConfigRepository;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -46,10 +50,13 @@ public class GlobalApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        AppLog.init(this);
+        // 尽早恢复持久化开关，避免关闭日志后启动时仍写入“应用已启动”
+        ConfigRepository repo = ConfigRepository.get(this);
+        RuntimeState.setLogEnabled(repo.isLogEnabled());
+        RuntimeState.setImagePreviewEnabled(repo.isImagePreviewEnabled());
         // 只保留全局异常捕获
         CrashHandler.getInstance().registerGlobal(this);
-        // 【核心修复】移除 registerPart(this)，它会导致主线程 Looper 死循环，引发假死
-        // CrashHandler.getInstance().registerPart(this); 
     }
 
     public static void write(InputStream input, OutputStream output) throws IOException {
@@ -178,7 +185,11 @@ public class GlobalApplication extends Application {
 
             public UncaughtExceptionHandlerImpl(Context context, String crashDir) {
                 this.mContext = context;
-                this.mCrashDir = TextUtils.isEmpty(crashDir) ? new File(mContext.getExternalCacheDir(), "crash") : new File(crashDir);
+                File base = mContext.getExternalCacheDir();
+                if (base == null) {
+                    base = mContext.getCacheDir();
+                }
+                this.mCrashDir = TextUtils.isEmpty(crashDir) ? new File(base, "crash") : new File(crashDir);
             }
 
             @Override

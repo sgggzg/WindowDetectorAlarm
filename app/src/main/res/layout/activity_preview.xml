@@ -37,12 +37,13 @@
             android:layout_height="match_parent"
             android:scaleType="fitCenter" />
 
-        <com.sgggzg.qmzg.RegionAdjustView
+        <com.sgggzg.qmzg.ui.view.RegionAdjustView
             android:id="@+id/regionView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>
 
+    <!-- 上下边界行 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,6 +84,53 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:text="0.81"
+            android:textColor="#FFFFFF"
+            android:background="#16213E"
+            android:padding="8dp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <!-- 【C 模块新增】左右边界行 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左边界:"
+            android:textColor="#AAAAAA"
+            android:layout_gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/etLeftPreview"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:text="0.00"
+            android:textColor="#FFFFFF"
+            android:background="#16213E"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="右边界:"
+            android:textColor="#AAAAAA"
+            android:layout_gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/etRightPreview"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:text="1.00"
             android:textColor="#FFFFFF"
             android:background="#16213E"
             android:padding="8dp"

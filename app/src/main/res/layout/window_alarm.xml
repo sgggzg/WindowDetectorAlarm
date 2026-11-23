@@ -59,7 +59,7 @@
         android:id="@+id/btnDismiss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="关闭并静音（30秒冷却）"
+        android:text="关闭并静音"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
         android:background="#E94560"

@@ -5,7 +5,6 @@
     android:orientation="horizontal"
     android:gravity="center_vertical">
 
-    <!-- 圆形小浮球 (半径减半，尺寸从60变为40) -->
     <TextView
         android:id="@+id/tv_float_ball"
         android:layout_width="40dp"
@@ -17,7 +16,6 @@
         android:textStyle="bold"
         android:gravity="center" />
 
-    <!-- 展开的菜单 (横向排列两个按钮，仅在展开时可见) -->
     <LinearLayout
         android:id="@+id/layout_float_menu"
         android:layout_width="wrap_content"
@@ -26,33 +24,51 @@
         android:background="@drawable/bg_float_menu"
         android:visibility="gone"
         android:gravity="center_vertical"
-        android:paddingEnd="8dp"
+        android:paddingEnd="6dp"
         android:paddingStart="4dp">
 
         <TextView
-            android:id="@+id/btn_float_stop_alarm"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_float_toggle_mask"
+            android:layout_width="66dp"
             android:layout_height="32dp"
-            android:text="停止报警"
+            android:text="暗屏"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            android:background="#E94560"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:background="#448AFF"
             android:gravity="center"
-            android:visibility="gone" /> <!-- 默认隐藏，报警时才显示 -->
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:includeFontPadding="false" />
 
         <TextView
             android:id="@+id/btn_float_stop_monitor"
-            android:layout_width="wrap_content"
+            android:layout_width="76dp"
             android:layout_height="32dp"
             android:text="停止监控"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             android:background="#FF9800"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
             android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:includeFontPadding="false"
+            android:layout_marginStart="6dp" />
+
+        <TextView
+            android:id="@+id/btn_float_pause"
+            android:layout_width="76dp"
+            android:layout_height="32dp"
+            android:text="暂停监控"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:background="#E94560"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:includeFontPadding="false"
             android:layout_marginStart="6dp" />
     </LinearLayout>
 </LinearLayout>
